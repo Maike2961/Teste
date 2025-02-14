@@ -1,16 +1,24 @@
-import pandas as pd
+from flask import Flask, request, jsonify
 
 
-df = pd.read_csv("./file/vendas.csv", encoding='ISO-8859-1', sep=';')
+app = Flask(__name__)
 
-df["Faturamento"] = df['Preco_Unitario'] * df['Quantidade']
+@app.route("/saudacao", methods=["GET"])
+def getNome():
+    nome = request.args.get("nome")
+    return jsonify({"message": f"saudação {nome}"})
 
-print(df)
+@app.route("/soma", methods=["POST"])
+def postSoma():
+    number = request.get_json()
+    
+    n1 = number.get("n1")
+    n2 = number.get("n2")
+    soma = n1 + n2
+    return jsonify({"message": f"{soma}"})
 
-maior_fatura = df["Faturamento"].max()
-menor_fatura = df["Faturamento"].min()
 
-print()
-print(f"A maior fatura é de {maior_fatura} e o menor é de {menor_fatura}")
+if __name__ == "__main__":
+    app.run(debug=True)
     
     
