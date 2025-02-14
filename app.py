@@ -1,23 +1,14 @@
-import asyncio
-import time
+"""
+    Primeiro para fazer o deploy para AWS usando o docker, primeiro
+    é necessário ter a aplicação flask montada, seguindo com Dockerfile
+    definido e uma lista de dependências.
+    
+    Segundo cria uma instância na AWS com o servico EC2, e fazer as configurações
+    após isso, conectar com a instância usando o ssh -i <chave.pem> <ec2-user@ip-public>,
+    instalar e atualizar o docker na instância, copiar a pasta do projeto para a instância
+    com scp -i <caminho/chave.pem> -r <pasta> <ec2-user@ip-public>, ir ate o diretório da pasta
+    builtar a imagem docker e finalmente executar o container.
+"""
 
-
-async def chamadas(delay, name):
-    print(f"Iniciando {name}")
-    await asyncio.sleep(delay)
-    
-async def main():
-    start = time.time()
-    
-    await chamadas(1, "Hello")
-    await chamadas(2, "Hello World")
-    await chamadas(3, "Hello Brave World")
-    
-    total = time.time() - start
-    
-    print(f"Tempo de execução {total:.2f}")
-
-asyncio.run(main())
-    
     
     
