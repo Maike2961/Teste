@@ -1,24 +1,20 @@
-from flask import Flask, request, jsonify
-
+from flask import Flask, request
+from forms import LoginForm
+from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
-
-@app.route("/saudacao", methods=["GET"])
-def getNome():
-    nome = request.args.get("nome")
-    return jsonify({"message": f"saudação {nome}"})
-
-@app.route("/soma", methods=["POST"])
-def postSoma():
-    number = request.get_json()
+app.config.from_pyfile('config.py')
+bcrypt = Bcrypt(app)
     
-    n1 = number.get("n1")
-    n2 = number.get("n2")
-    soma = n1 + n2
-    return jsonify({"message": f"{soma}"})
 
+@app.route('/login', methods=["POST"])
+def login():
+    form = LoginForm()
+
+    if form.validate_on_submit():
+        if form.validate_admin(form):
+            return "Acesso Concedido"
+        return "Acesso negado"
 
 if __name__ == "__main__":
     app.run(debug=True)
-    
-    
