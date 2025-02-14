@@ -1,20 +1,23 @@
-from flask import Flask, request
-from forms import LoginForm
-from flask_bcrypt import Bcrypt
+import asyncio
+import time
 
-app = Flask(__name__)
-app.config.from_pyfile('config.py')
-bcrypt = Bcrypt(app)
+
+async def chamadas(delay, name):
+    print(f"Iniciando {name}")
+    await asyncio.sleep(delay)
     
+async def main():
+    start = time.time()
+    
+    await chamadas(1, "Hello")
+    await chamadas(2, "Hello World")
+    await chamadas(3, "Hello Brave World")
+    
+    total = time.time() - start
+    
+    print(f"Tempo de execução {total:.2f}")
 
-@app.route('/login', methods=["POST"])
-def login():
-    form = LoginForm()
-
-    if form.validate_on_submit():
-        if form.validate_admin(form):
-            return "Acesso Concedido"
-        return "Acesso negado"
-
-if __name__ == "__main__":
-    app.run(debug=True)
+asyncio.run(main())
+    
+    
+    
