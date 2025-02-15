@@ -1,29 +1,13 @@
-import asyncio
-import time
+""" 
+    Durante meu estagio em 2023, surgiu um projeto de desenvolver um aplicativo em Dart e Flutter
+    uma linguagem e Framework que eu nunca tive contato, e não tive layout ou designers sobre como 
+    o aplicativo em si ficaria, precisei desenvolver tanto o backend quanto o frontend dessa aplicação e 
+    enquanto eu estava aprendendo, eu estava desenvolvendo e meu gerente sempre me pedindo atualizações 
+    sobre o andamento do projeto, foi uma experiência desafiadora em que tive atrasos, devido a bugs e 
+    erros de design mas que no fim foi entregue um aplicativo satisfatório, e consegui devido a gestão de 
+    tempo entre aprendizado e realização dos codigos e design e a calma acima para conseguir coordenar
+    as tarefas. 
 
-""" função assincrona que tem como parametros a duração dentre as chamadas e o nome  """
-async def chamadas(delay, name):
-    print(f"Iniciando {name}")
-    
-    """ enquando a duração não estiver completa não prosseguira para a proxima chamada  """
-    await asyncio.sleep(delay)
-    
-""" função principal que chamará a função chamadas tres vezes """
-async def main():
-    start = time.time()
-    
-    """ enquando a chamada não estiver completa, a outra ficara em espera de forma sequencial """
-    await chamadas(1, "Hello")
-    await chamadas(2, "Hello World")
-    await chamadas(3, "Hello Brave World")
-    
-    """ calculando o tempo que todoas as funções levaram para concluir """
-    total = time.time() - start
-    
-    print(f"Tempo de execução {total:.2f}")
-
-""" executando a função main """
-asyncio.run(main())
-    
+"""
     
     
