@@ -17,8 +17,7 @@ def postSoma():
     soma = n1 + n2
     return jsonify({"message": f"{soma}"})
 
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")
     
     
